@@ -10,7 +10,7 @@ var pool = mysql.createPool({
     user: 'root',
     password: 'root',
     port: 3306,
-    database: 'mogu',
+    database: 'jpi',
     charset: 'UTF8_GENERAL_CI',
     multipleStatements: true //允许写多个sql语句,允许你拼接sql一次执行多个语句
 });

@@ -17,7 +17,7 @@ Router.post('/reg1/:name', async (req, res) => {
     let {
         name
     } = req.params;
-    let sql = `SELECT * FROM user where name='${name}'`;
+    let sql = `SELECT * FROM users where username='${name}'`;
 
     let data = await query(sql); //await 等待的是一个promise对象;等到结果是：是对象里面resolve(data) 的结果；一定是放在async函数里面才能用
     res.send(data);
@@ -31,14 +31,14 @@ Router.post('/reg2/:name', async (req, res) => {
         name
     } = req.params;
 
-    let sql = `INSERT INTO user(name,password) VALUES('${name.split(',')[0]}','${name.split(',')[1]}')`;
+    let sql = `INSERT INTO users(username,password) VALUES('${name.split(',')[0]}','${name.split(',')[1]}')`;
 
     let data = await query(sql); //await 等待的是一个promise对象;等到结果是：是对象里面resolve(data) 的结果；一定是放在async函数里面才能用
     data.message = '成功'
     res.send(data);
 });
 
-//登陆功能
+//前端登陆功能
 Router.post('/login/:name', async (req, res) => {
     // res.Header('Content-Type', 'text/html; charset=utf-8');
     //查询数据库的数据
@@ -46,7 +46,21 @@ Router.post('/login/:name', async (req, res) => {
         name
     } = req.params;
     // let sql = `INSERT INTO user(name,password) VALUES('lihuangbao1','123456')`;
-    let sql = `SELECT * FROM  user where name='${name.split(',')[0]}' AND password = '${name.split(',')[1]}'`;
+    let sql = `SELECT * FROM  users where username='${name.split(',')[0]}' AND password = '${name.split(',')[1]}'`;
+
+    let data = await query(sql); //await 等待的是一个promise对象;等到结果是：是对象里面resolve(data) 的结果；一定是放在async函数里面才能用
+    res.send(data);
+});
+
+//后台登陆功能
+Router.post('/htailogin/:name', async (req, res) => {
+    // res.Header('Content-Type', 'text/html; charset=utf-8');
+    //查询数据库的数据
+    let {
+        name
+    } = req.params;
+    // let sql = `INSERT INTO user(name,password) VALUES('lihuangbao1','123456')`;
+    let sql = `SELECT * FROM  user where username='${name.split(',')[0]}' AND password = '${name.split(',')[1]}'`;
 
     let data = await query(sql); //await 等待的是一个promise对象;等到结果是：是对象里面resolve(data) 的结果；一定是放在async函数里面才能用
     res.send(data);
@@ -65,6 +79,15 @@ Router.post('/put/:name', async (req, res) => {
 
     let data = await query(sql); //await 等待的是一个promise对象;等到结果是：是对象里面resolve(data) 的结果；一定是放在async函数里面才能用
     data.message = '成功'
+    res.send(data);
+});
+
+//get请求获取所有是商品数据 首页数据
+Router.get("/userdata", async (req, res) => {
+    //查询数据库的数据
+    let sql = "SELECT * FROM users";
+
+    let data = await query(sql); //await 等待的是一个promise对象;等到结果是：是对象里面resolve(data) 的结果；一定是放在async函数里面才能用
     res.send(data);
 });
 

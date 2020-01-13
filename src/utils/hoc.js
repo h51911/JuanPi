@@ -1,13 +1,10 @@
 import React from 'react';
 
 export function withStorage(InnerComponent) {
-    let user = localStorage.getItem('user');
-    if (user) {
-        user = JSON.parse(user);
-    }
+    let user = localStorage.getItem('username') ? localStorage.getItem('username') : '';
 
     return class OuterComponent extends React.Component {
-        render(){
+        render() {
             return <InnerComponent {...this.props} user={user}>{this.props.children}</InnerComponent>
         }
     }

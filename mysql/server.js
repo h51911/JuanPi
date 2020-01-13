@@ -16,10 +16,10 @@ let allRouter = require('./router'); //这里可以写index。也可以不写，
 app.use(express.static('./'));
 
 app.use(allRouter); //引入总的路由，allRouter是一个中间件
-
+ 
 //路由的分配
 
 //监听端口
 app.listen(PORT, () => {
-    // console.log('服务器已开启，请访问localhost:20086');
+     console.log('服务器已开启，请访问localhost:10086');
 });
